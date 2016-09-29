@@ -15,7 +15,7 @@ if(!empty($_GET)){
     
     foreach(array_keys($headers) as $kiy){array_push($headers_composed,"$kiy: "+$headers[$kiy]);}
 
-    curl_setopt($ch,CURLOPT_HTTPHEADER,$headers);
+    curl_setopt($ch,CURLOPT_HTTPHEADER,$headers_composed);
   }
 
   curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);

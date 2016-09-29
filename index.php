@@ -41,12 +41,8 @@ if(!empty($_GET)){
     }
   }
 
-  echo $headers;
-  echo $body;
-
-
   curl_close($ch);
-  $ret=array("headers"=>$headers_composed,"body"=>json_decode($body,true));
+  $ret=array("headers"=>$headers_composed,"body"=>json_decode($body));
 }else{$ret=array("error"=>array("message"=>"Unknown parameter!"));}
 
 header("Content-type: application/json");

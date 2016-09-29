@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-
 $ret=array();
 
 if(!empty($_GET)){
@@ -32,23 +30,25 @@ if(!empty($_GET)){
   $header_len=curl_getinfo($ch,CURLINFO_HEADER_SIZE);
 
   $headers=substr($resp,0,$header_len);
+  $body=substr($resp,$header_len);
+
+  
   $headers_composed=array();
   $headers_text=substr($headers,0,strpos($headers,"\r\n\r\n"));
   foreach(explode("\r\n",$headers_text) as $i=>$line){
     if($i==0){$headers_composed["http_code"]=$line;}else{
-      list($key,$value)=explode(": ",$line);
-      $headers_composed[$key]=$value;
+      $headers_composed[explode(": ",$line)[0]]=explode(": ",$line)[1];
     }
   }
 
-  $body=substr($resp,$header_len);
-  echo $resp;
-  
+  echo $headers;
+  echo $body;
+
+
   curl_close($ch);
   $ret=array("headers"=>$headers_composed,"body"=>json_decode($body,true));
 }else{$ret=array("error"=>array("message"=>"Unknown parameter!"));}
 
 header("Content-type: application/json");
 echo json_encode($ret);
-echo json_encode($_GET);
 ?>

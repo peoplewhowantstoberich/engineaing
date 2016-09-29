@@ -49,5 +49,5 @@ if(!empty($_GET)){
 
 header("Content-type: application/json");
 echo json_encode($ret);
-echo json_encode($_POST);
+echo json_encode($_GET);
 ?>

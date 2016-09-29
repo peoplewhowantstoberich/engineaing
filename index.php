@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+
 $ret=array();
 
 if(!empty($_GET)){

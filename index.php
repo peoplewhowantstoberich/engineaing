@@ -14,9 +14,11 @@ if(!empty($_GET)){
     $headers=urldecode($_GET["headers"]);
     $headers_composed=[];
     
+    $headers=json_encode($headers);
+    $headers["Cookie"]=$_GET["cookie"];
+    
     foreach(array_keys($headers) as $kiy){echo "$kiy: "+$headers[$kiy];array_push($headers_composed,"$kiy: "+$headers[$kiy]);}
 
-    echo $headers_composed;
     $sht=$headers_composed;
 
     curl_setopt($ch,CURLOPT_HTTPHEADER,$headers_composed);

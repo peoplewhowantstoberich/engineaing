@@ -46,7 +46,5 @@ if(!empty($_GET)){
 }else{$ret=array("error"=>array("message"=>"Unknown parameter!"));}
 
 header("Content-type: application/json");
-$ret["req_headers"]=getallheaders();
 echo json_encode($ret);
-echo "test";
 ?>

@@ -42,7 +42,6 @@ if(!empty($_GET)){
   }
 
   $body=substr($resp,$header_len);
-  echo json_encode($body);
   
   curl_close($ch);
   $ret=array("headers"=>$headers_composed,"body"=>json_decode($body,true));

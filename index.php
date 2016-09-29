@@ -12,6 +12,8 @@ if(!empty($_GET)){
   if(!empty($_GET["headers"])){
     $headers=urldecode($_GET["headers"]);
     $headers_composed=[];
+    
+    foreach(array_keys($headers) as $kiy){array_push($headers_composed,"$kiy: "+$headers[$kiy]);}
 
     curl_setopt($ch,CURLOPT_HTTPHEADER,$headers);
   }

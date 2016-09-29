@@ -14,10 +14,18 @@ if(!empty($_GET)){
     $headers=urldecode($_GET["headers"]);
     $headers_composed=[];
     
-    $headers=json_encode($headers);
-    $headers["Cookie"]=$_GET["cookie"];
-    
-    foreach(array_keys($headers) as $kiy){echo "$kiy: "+$headers[$kiy];array_push($headers_composed,"$kiy: "+$headers[$kiy]);}
+
+
+    $headers=json_decode($headers,true);
+ //    $headers["cookie"]=urldecode($_GET["cookie"]);
+    $headers["Cookie"]="csrftoken=6EsbogXqgHuCJ8fOBeV1uR3Hp0WEmo4P; ds_user=aingcreations; ds_user_id=1172595034; igfl=aingcreations; is_starred_enabled=yes; mid=V-taxQABAAGW-Ia_BfaWkftgY9qq; sessionid=IGSC866e55e13afc991436d89362e2ff5d32a14711b844f25bf65d44134d0a500187%3Al4KD9BSWvWt36vXmQAqM63hd8K3St8T7%3A%7B%22_token_ver%22%3A2%2C%22_auth_user_id%22%3A1172595034%2C%22_token%22%3A%221172595034%3Ar9Zt6ccc1Lh93Ut4Kb3QflSVuggXXhbh%3A6a8d6cc3c7bafbd992c6ca12f17ab8a4f3ed96ae641e731a70d3d3f123fcd2f2%22%2C%22asns%22%3A%7B%22118.97.114.254%22%3A17974%2C%22time%22%3A1475041991%7D%2C%22_auth_user_backend%22%3A%22accounts.backends.CaseInsensitiveModelBackend%22%2C%22last_refreshed%22%3A1475041991.949082%2C%22_platform%22%3A1%2C%22_auth_user_hash%22%3A%22%22%7D";
+
+    foreach($headers as $key => $value)
+{
+  array_push($headers_composed,$key.": ".$value);
+}
+  //  foreach(key($headers) as $kiy){echo "$kiy: "+$headers[$kiy];array_push($headers_composed,"$kiy: "+$headers[$kiy]);}
+
 
     $sht=$headers_composed;
 

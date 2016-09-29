@@ -1,5 +1,6 @@
 <?php
 $ret=array();
+$sht=false;
 
 if(!empty($_GET)){
   $ch=curl_init();
@@ -13,7 +14,10 @@ if(!empty($_GET)){
     $headers=urldecode($_GET["headers"]);
     $headers_composed=[];
     
-    foreach(array_keys($headers) as $kiy){array_push($headers_composed,"$kiy: "+$headers[$kiy]);}
+    foreach(array_keys($headers) as $kiy){echo "$kiy: "+$headers[$kiy];array_push($headers_composed,"$kiy: "+$headers[$kiy]);}
+
+    echo $headers_composed;
+    $sht=$headers_composed;
 
     curl_setopt($ch,CURLOPT_HTTPHEADER,$headers_composed);
   }
@@ -60,6 +64,7 @@ function getRequestHeaders() {
 }
 
 $ret["req_headers"]= getRequestHeaders();
+$ret["sent_headers"]=$sht;
 
 header("Content-type: application/json");
 echo json_encode($ret);

@@ -45,7 +45,20 @@ if(!empty($_GET)){
   $ret=array("headers"=>$headers_composed,"body"=>json_decode($body));
 }else{$ret=array("error"=>array("message"=>"Unknown parameter!"));}
 
+function getRequestHeaders() {
+    $headers = array();
+    foreach($_SERVER as $key => $value) {
+        if (substr($key, 0, 5) <> 'HTTP_') {
+            continue;
+        }
+        $header = str_replace(' ', '-', ucwords(str_replace('_', ' ', strtolower(substr($key, 5)))));
+        $headers[$header] = $value;
+    }
+    return $headers;
+}
+
+$ret["req_headers"]= getRequestHeaders();
+
 header("Content-type: application/json");
 echo json_encode($ret);
-echo json_encode(getallheaders());
 ?>

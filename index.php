@@ -30,6 +30,9 @@ if(!empty($_GET)){
   $header_len=curl_getinfo($ch,CURLINFO_HEADER_SIZE);
 
   $headers=substr($resp,0,$header_len);
+  
+    echo $headers;
+  
   $body=substr($resp,$header_len);
 
   
@@ -41,7 +44,7 @@ if(!empty($_GET)){
     }
   }
 
-  echo $headers;
+
   echo $body;
 
 

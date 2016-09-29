@@ -7,12 +7,12 @@ if(!empty($_GET)){
   curl_setopt($ch,CURLOPT_URL,$_GET["uri"]);
   curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
   curl_setopt($ch,CURLOPT_FOLLOWLOCATION,true);
+  curl_setopt($ch,CURLOPT_HEADER,true);
 
   if(!empty($_GET["headers"])){
     $headers=urldecode($_GET["headers"]);
     $headers_composed=[];
 
-    curl_setopt($ch,CURLOPT_HEADER,true);
     curl_setopt($ch,CURLOPT_HTTPHEADER,$headers);
   }
 
@@ -30,12 +30,9 @@ if(!empty($_GET)){
   $header_len=curl_getinfo($ch,CURLINFO_HEADER_SIZE);
 
   $headers=substr($resp,0,$header_len);
-  
-    echo $headers;
-  
   $body=substr($resp,$header_len);
 
-  
+
   $headers_composed=array();
   $headers_text=substr($headers,0,strpos($headers,"\r\n\r\n"));
   foreach(explode("\r\n",$headers_text) as $i=>$line){
@@ -44,7 +41,7 @@ if(!empty($_GET)){
     }
   }
 
-
+  echo $headers;
   echo $body;
 
 

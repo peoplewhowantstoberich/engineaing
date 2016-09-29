@@ -48,4 +48,5 @@ if(!empty($_GET)){
 header("Content-type: application/json");
 $ret["req_headers"]=getallheaders();
 echo json_encode($ret);
+echo "test";
 ?>
